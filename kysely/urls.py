@@ -3,12 +3,12 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # ex: /kyselyt/
-     path("", views.indeksi, name="index"),
-    # ex: /kyselyt/5/
-    path("<int:question_id>/", views.yksityiskohdat, name="yksityiskohdat"),
-    # ex: /kyselyt/5/tulokset/
-    path("<int:question_id>/results/", views.tulokset, name="tulokset"),
-    # ex: /kyselyt/5/äänestä/
-    path("<int:question_id>/vote/", views.äänestä, name="äänestä"),
+    # esim. /kyselyt/
+    path("", views.indeksi, name="indeksi"),
+    # esim. /kyselyt/5/
+    path("<int:kysymys_id>/", views.näytä, name="näytä"),
+    # esim. /kyselyt/5/results/
+    path("<int:kysymys_id>/tulokset/", views.tulokset, name="tulokset"),
+    # esim. /kyselyt/5/äänestä/
+    path("<int:kysymys_id>/äänestä/", views.äänestä, name="äänestä"),
 ]
