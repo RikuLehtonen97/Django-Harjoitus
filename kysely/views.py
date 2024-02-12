@@ -1,3 +1,5 @@
+import datetime 
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -12,8 +14,18 @@ class ListaNäkymä(generic.ListView):
     context_object_name = "kysymykset"
 
     def get_queryset(self):
+       
+        nyt = timezone.now()
+        
+        kaikki_kysymykset = Kysymys.objects.all()
+        
+        ei_tulevaisuudessa = kaikki_kysymykset.filter(julkaisupvm__lte=nyt)
+       
+        järjestetyt_kysymykset = ei_tulevaisuudessa.order_by("-julkaisupvm")
+            
+            
         """Return the last five published questions."""
-        return Kysymys.objects.order_by("-julkaisupvm")[:2]
+        return järjestetyt_kysymykset[:2]
 
 
 class NäytäNäkymä(generic.DetailView):
